@@ -8,7 +8,7 @@ Random forest?
 
 SST: https://coastwatch.pfeg.noaa.gov/erddap/griddap/jplMURSST41.html
 Color: https://rsg.pml.ac.uk/thredds/ncss/grid/CCI_ALL-v6.0-1km-DAILY/dataset.html
-Bathymetry: 
+Bathymetry: https://download.gebco.net/
 SSH: 
 Wind: 
 

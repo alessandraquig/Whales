@@ -1,7 +1,7 @@
 import netCDF4 as nc
 
 # Open the NetCDF file
-file_path = "Data/SST_2018-2023.nc"
+file_path = "Data/bathymetry.nc"
 dataset = nc.Dataset(file_path)
 
 # View the metadata
@@ -16,4 +16,4 @@ print(dataset)
 #     print(var[:3])
 
 # Close the NetCDF file
-dataset.close()
+#dataset.close()

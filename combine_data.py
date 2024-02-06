@@ -1,16 +1,19 @@
-import xarray as xr
+import nctoolkit as nc
 
-file1 = 'SST_2018-2023.nc'
-file2 = 'bathymetry.nc'
+file1 = 'Data/SST_2018-2023.nc'
+file2 = 'Data/color_2018-2023.nc'
 
 # Open the first NetCDF file
-ds1 = xr.open_dataset('file1.nc')
+ds1 = nc.Dataset(file1)
 
 # Open the second NetCDF file
-ds2 = xr.open_dataset('file2.nc')
+ds2 = nc.Dataset(file2)
 
-# Merge the two datasets along the time, latitude, and longitude dimensions
-merged_ds = xr.merge([ds1, ds2])
+# remove the 1st netcdf files variables from the second's
+ds2.drop(ds1.variables)
+# merge the files
+ds1.append(ds2)
+ds1.merge()
 
-# Save the merged dataset to a new NetCDF file
-merged_ds.to_netcdf('merged_file.nc')
+# save the files as a netcdf file
+#ds1.to_nc("environmental_data.nc")
