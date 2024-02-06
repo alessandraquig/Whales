@@ -7,7 +7,10 @@ Random forest?
 ### Data Sources
 
 SST: https://coastwatch.pfeg.noaa.gov/erddap/griddap/jplMURSST41.html
-Color: PACE?
+Color: https://rsg.pml.ac.uk/thredds/ncss/grid/CCI_ALL-v6.0-1km-DAILY/dataset.html
 Bathymetry: 
 SSH: 
 Wind: 
+
+### Helpful links
+https://ferret.pmel.noaa.gov/Ferret/documentation/coards-netcdf-conventions - netCDF standard column headings, etc.
