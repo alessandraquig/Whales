@@ -1,19 +1,28 @@
-import nctoolkit as nc
+import netCDF4 as nc
 
-file1 = 'Data/SST_2018-2023.nc'
-file2 = 'Data/color_2018-2023.nc'
+def combine_dimension_names(data):
+# Extract the latitude and longitude variables
+    lat_var = data.variables.get('lat') or data.variables.get('latitude')
+    if lat_var is not None:
+        lat = lat_var[:]
+    else:
+        raise ValueError("Latitude variable not found in the netCDF file.")
+    lon_var = data.variables.get('lon') or data.variables.get('longitude')
+    if lon_var is not None:
+        lon = lon_var[:]
+    else:
+        raise ValueError("Longitude variable not found in the netCDF file.")
+    return lat, lon
 
-# Open the first NetCDF file
-ds1 = nc.Dataset(file1)
+if __name__ == "__main__":
+    # Read the netCDF file
 
-# Open the second NetCDF file
-ds2 = nc.Dataset(file2)
+    file1 = nc.Dataset('Data/color_2018-2023.nc', 'r')
+    file2 = nc.Dataset('Data/SST_2018-2023.nc', 'r')
 
-# remove the 1st netcdf files variables from the second's
-ds2.drop(ds1.variables)
-# merge the files
-ds1.append(ds2)
-ds1.merge()
+    lat1, lon1 = combine_dimension_names(file1)
+    lat2, lon2 = combine_dimension_names(file2)
 
-# save the files as a netcdf file
-#ds1.to_nc("environmental_data.nc")
+    print(lat1.shape, lon1.shape)
+    print(lat2.shape, lon2.shape)
+
