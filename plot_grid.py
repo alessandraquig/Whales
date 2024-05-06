@@ -1,10 +1,12 @@
 import xarray as xr
 import matplotlib.pyplot as plt
 import numpy as np
-from datetime import datetime, timedelta
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+from datetime import datetime
 
 # Load the data using xarray
-nc_file = "Data\SST_2018-2023.nc"
+nc_file = "Data/SST_2018-2023.nc"
 data = xr.open_dataset(nc_file)
 print(data)
 
@@ -32,6 +34,9 @@ time = (target_date - start_date).days
 
 
 dep_var, var_name = data['analysed_sst'], 'Sea Surface Temperature'
+if var_name == "Sea Surface Temperature":
+    var_name_short = "SST"
+dep_var = dep_var.values[time,:,:]
 
 #read_netcdf(nc_file, grid=None, name=None, just_grid=False, halo=0, nodata_value=-9999.0)
 
@@ -42,19 +47,23 @@ lon_range = data['longitude'].values
 
 # Create a meshgrid of latitude and longitude values
 lon, lat = np.meshgrid(lon_range, lat_range)
-print(lon.shape, lat.shape)
 
-print(dep_var.values.shape)
+fig, ax = plt.subplots(figsize=(10, 6), subplot_kw={'projection': ccrs.PlateCarree()})
 
-# Plot the grid using pcolormesh
-plt.pcolormesh(lon, lat, dep_var.values[time,:,:])
+# Plot the data on a latitude and longitude scale
+im = ax.pcolormesh(lon, lat, dep_var, transform=ccrs.PlateCarree())
 
-# Add colorbar, title, and labels if needed
-plt.colorbar()
+# Mask out land
+ax.add_feature(cfeature.LAND, zorder=1, facecolor='w')
+
+# Add coastlines
+#ax.coastlines('10m')
+
+# Add a colorbar, title, and labels
+cbar = plt.colorbar(im, ax=ax)
 plt.title(f'{var_name} on {cal_date}')
 plt.xlabel('Longitude')
 plt.ylabel('Latitude')
 
-# Show the plot
-plt.show()
+plt.savefig(f'Output/{var_name_short}_{cal_date}.pdf')
 

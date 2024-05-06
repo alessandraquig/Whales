@@ -2,7 +2,7 @@ import netCDF4 as nc
 
 
 # Open the NetCDF file
-file_path = "Data/color_2018-2023.nc"
+file_path = "Data/currents_2018-2023.nc"
 dataset = nc.Dataset(file_path)
 
 # View the metadata
