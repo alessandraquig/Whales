@@ -1,0 +1,8 @@
+gridtype=lonlat
+xfirst=34.5 #leftmost longitude
+xinc=0.01 #resolution in degrees
+xsize=200 #number of points (e.g. 34.5 to 36.5 degrees)
+yfirst=-24.5
+yinc=0.01
+ysize=150
+

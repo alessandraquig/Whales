@@ -14,7 +14,7 @@ import cartopy.feature as cfeature
 # plt.rcParams.update(this_rc_params)
 
 # Load the data using xarray
-nc_file = "Data/bathymetry.nc"
+nc_file = "Data/bathymetry_regridded.nc"
 data = xr.open_dataset(nc_file)
 print(data)
 
@@ -53,5 +53,5 @@ ax.set_title(r'Depth (m)')
 ax.set_xlabel(r'Longitude')
 ax.set_ylabel(r'Latitude')
 
-plt.savefig('Output/bathymetry_map.pdf')
+plt.savefig('Output/bathymetry_map_regridded.pdf')
 
