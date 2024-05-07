@@ -19,3 +19,9 @@ For currents, I had to download two separate datasets split in June/July 2021 an
 
 ### Helpful links
 https://ferret.pmel.noaa.gov/Ferret/documentation/coards-netcdf-conventions - netCDF standard column headings, etc.
+
+### Steps
+1. Use conservative regridding with cdo to put all the different data types onto the same 0.01x0.01 degree grid.
+2. Put all data types into the same netCDF file (make sure bathymetry works at all time points).
+3. Add a layer for whales per unit effort into the netCDF file.
+
