@@ -6,7 +6,7 @@ import cartopy.feature as cfeature
 from datetime import datetime
 
 # Load the data using xarray
-nc_file = "Data/currents_2018-2023.nc"
+nc_file = "Data/SST_regridded.nc"
 data = xr.open_dataset(nc_file)
 print(data)
 
@@ -24,8 +24,8 @@ dep_var = dep_var.values[time,:,:]
 #read_netcdf(nc_file, grid=None, name=None, just_grid=False, halo=0, nodata_value=-9999.0)
 
 # Extract the latitude and longitude ranges
-lat_range = data['latitude'].values
-lon_range = data['longitude'].values
+lat_range = data['lat'].values
+lon_range = data['lon'].values
 #print(lat_range.shape, lon_range.shape)
 
 # Create a meshgrid of latitude and longitude values
@@ -48,5 +48,5 @@ plt.title(f'{var_name} on {cal_date}')
 plt.xlabel('Longitude')
 plt.ylabel('Latitude')
 
-plt.savefig(f'Output/{var_name_short}_{cal_date}.pdf')
+plt.savefig(f'Output/{var_name_short}_{cal_date}_regridded.pdf')
 
